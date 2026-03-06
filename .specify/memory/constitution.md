@@ -1,55 +1,132 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Todo Evolution Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. API-First Design
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All backend functionality must be exposed through well-documented RESTful APIs. The API serves as the single source of truth for data operations, ensuring consistency between frontend, mobile, and any future integrations. Every endpoint must have clear input/output contracts, error handling, and authentication requirements.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Type Safety (NON-NEGOTIABLE)
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+TypeScript must be used throughout the frontend with strict mode enabled. All API responses must have corresponding TypeScript types. Backend Pydantic schemas must mirror frontend types. No `any` types in production code without explicit justification and TODO comments.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Test-Driven Development
 
-### [PRINCIPLE_6_NAME]
+Tests must be written before or alongside implementation code. Priority order:
+1. Unit tests for services and utilities
+2. Integration tests for API endpoints
+3. Contract tests between frontend and backend
+4. E2E tests for critical user journeys
 
+All PRs must include tests for new functionality.
 
-[PRINCIPLE__DESCRIPTION]
+### IV. Security First
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+- Passwords must always be hashed using bcrypt
+- JWT tokens must have reasonable expiration times
+- All authenticated endpoints must validate tokens
+- CORS must be explicitly configured
+- SQL injection prevention through SQLAlchemy ORM
+- XSS prevention through React's built-in escaping
+- Input validation on both frontend and backend
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### V. Responsive & Accessible UI
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- All pages must be responsive (mobile 320px to desktop 1920px+)
+- WCAG 2.1 AA compliance for accessibility
+- Keyboard navigation support for all interactive elements
+- Proper ARIA labels and semantic HTML
+- Color contrast ratios meeting accessibility standards
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### VI. Incremental Delivery
+
+Features are delivered in small, testable increments. Each increment must:
+- Be independently functional
+- Have clear acceptance criteria
+- Include tests
+- Be deployable without breaking existing functionality
+
+## Code Quality Standards
+
+### Backend (Python/FastAPI)
+- Follow PEP 8 style guidelines
+- Use type hints for all function signatures
+- Docstrings for all public functions and classes
+- Dependency injection for testability
+- Async/await for I/O operations where beneficial
+
+### Frontend (Next.js/TypeScript)
+- Functional components with hooks
+- Server components where possible, client components only when needed
+- Custom hooks for reusable logic
+- Component composition over prop drilling
+- Tailwind CSS for styling with consistent design tokens
+
+### Database
+- All tables must have primary keys (UUIDs preferred)
+- Foreign key constraints for relationships
+- Indexes on frequently queried columns
+- Migration scripts for all schema changes
+- Soft deletes where audit trail is needed
+
+## Development Workflow
+
+### Branch Strategy
+- `main` - Production-ready code
+- Feature branches: `feature/<feature-name>`
+- Bug fixes: `fix/<issue-description>`
+- All work done in feature branches with PRs to main
+
+### Commit Standards
+- Conventional commits format
+- Clear, descriptive commit messages
+- Reference issues/tickets where applicable
+- Small, focused commits
+
+### Code Review Requirements
+- All PRs require at least one review
+- CI checks must pass (linting, tests, type checking)
+- No direct commits to main branch
+- PRs must include description of changes and testing performed
+
+## Quality Gates
+
+### Before Merge
+- [ ] All tests passing
+- [ ] No type errors
+- [ ] Linting passes
+- [ ] Code reviewed and approved
+- [ ] Documentation updated if needed
+
+### Before Deploy
+- [ ] All quality gates passed
+- [ ] Manual testing of critical paths completed
+- [ ] Environment variables configured
+- [ ] Database migrations tested
+- [ ] Rollback plan documented
+
+## Observability
+
+### Logging
+- Structured JSON logging in production
+- Log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
+- Include request IDs for tracing
+- Never log sensitive data (passwords, tokens, PII)
+
+### Monitoring
+- Health check endpoint at `/health`
+- API response time tracking
+- Error rate monitoring
+- Database query performance tracking
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices for the Todo Evolution project. Amendments require:
+1. Proposal with rationale
+2. Team discussion
+3. Documentation of the change
+4. Migration plan for existing code if needed
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All contributors must acknowledge and follow these principles. Code reviews must verify compliance.
+
+**Version**: 1.0.0 | **Ratified**: 2026-02-23 | **Last Amended**: 2026-02-23

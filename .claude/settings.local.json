@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1 -Json)",
+      "Bash(cmd /c \"dir /s *.md\")",
+      "Bash(git fetch --all --prune)",
+      "Bash(ls -d specs/*-frontend-ui-spec)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" -Json -Number 1 -ShortName \"frontend-ui-spec\" -Description \"You are the Spec Writer Agent working under the \"\"Todo Evolution – Phase II Project Constitution\"\".\n\nYour task is to write the COMPLETE FRONTEND SPECIFICATION only.\n\nContext:\n- Frontend framework: Next.js \\(App Router\\)\n- This is a multi-user Todo web application\n- Backend and database already exist conceptually but are NOT your concern\n- You must strictly follow Spec-Driven Development\n- No implementation, no code, no CSS, no Tailwind classes\n\nGoals:\n- Define a modern, clean, professional, and production-grade UI\n- UI should feel SaaS-level \\(simple, elegant, minimal, intuitive\\)\n- UX must be suitable for real users, not a demo app\n\nYour responsibilities:\n1. Define all frontend pages\n2. Define layouts, navigation structure, and user flows\n3. Define UI states \\(loading, empty, error, success\\)\n4. Define component responsibilities at a conceptual level\n5. Define accessibility and usability standards\n6. Define responsive behavior \\(mobile, tablet, desktop\\)\n\nPages to cover \\(minimum\\):\n- Authentication \\(Login, Register\\)\n- Dashboard\n- Task List\n- Create / Edit Task\n- Profile / Account\n- Error pages \\(401, 404, 500\\)\n\nFor each page, specify:\n- Purpose\n- Layout structure \\(header, sidebar, main content, footer\\)\n- Key UI components \\(buttons, forms, lists, modals\\)\n- User interactions\n- State transitions\n- Validation feedback behavior\n\nUI & UX Standards:\n- Clean spacing, consistent typography\n- Clear visual hierarchy\n- Minimal color palette\n- Accessible contrast and readable font sizes\n- Keyboard navigable components\n- Clear\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/update-agent-context.ps1\" -AgentType claude)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks)",
+      "Bash(ls \"F:\\\\Hackathon 2\\\\phase 2\\\\specs\\\\001-frontend-ui-spec\\\\checklists\"\" 2>nul || echo \"No checklists directory \")",
+      "Bash(dir \"F:\\\\Hackathon 2\\\\phase 2\\\\specs\\\\001-frontend-ui-spec\\\\checklists\"\" 2>nul || echo \"No checklists directory \")",
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(dir \"F:\\\\Hackathon 2\\\\phase 2\\\\frontend\\\\src\\\\app\" /s)"
+    ]
+  }
+}
